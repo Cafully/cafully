@@ -1,0 +1,101 @@
+allprojects {
+    group 'cn.enaium.cafully'
+    version '1.0.0'
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        api 'org.tinylog:tinylog-api:2.6.0'
+        api 'org.tinylog:tinylog-impl:2.6.0'
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = "UTF-8"
+    }
+
+    publishing {
+        repositories {
+            def ENV = System.getenv()
+            if (ENV.MAVEN_URL) {
+                maven {
+                    url ENV.MAVEN_URL
+                }
+            }
+
+            maven {
+                url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username ossrhUsername
+                    password ossrhPassword
+                }
+            }
+        }
+
+        publications {
+            mavenJava(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+
+                versionMapping {
+                    usage('java-api') {
+                        fromResolutionOf('runtimeClasspath')
+                    }
+                    usage('java-runtime') {
+                        fromResolutionResult()
+                    }
+                }
+
+                pom {
+                    name = 'cafully'
+                    description = 'A Java Agent Framework'
+                    url = 'https://github.com/Cafully/cafully'
+
+                    licenses {
+                        license {
+                            name = 'Mozilla Public License Version 2.0'
+                            url = 'https://mozilla.org/MPL/2.0'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'enaium'
+                            name = 'Enaium'
+                            email = 'Enaium@outlook.com'
+                        }
+                    }
+
+                    scm {
+                        connection = 'scm:git:https://github.com/Cafully/cafully.git'
+                        developerConnection = 'scm:git:https://github.com/Cafully/cafully.git'
+                        url = 'https://github.com/Cafully/cafully'
+                    }
+                }
+            }
+        }
+    }
+
+    signing {
+        sign publishing.publications.mavenJava
+    }
+}

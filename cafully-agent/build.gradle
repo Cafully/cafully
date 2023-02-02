@@ -1,0 +1,33 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+dependencies {
+    api project(":cafully-api")
+    api project(":cafully-core")
+    api project(":cafully-util")
+    implementation 'com.vdurmont:semver4j:3.1.0'
+}
+
+jar {
+    manifest.attributes(
+            'Manifest-Version': 1.0,
+            'Main-Class': 'cn.enaium.cafully.agent.Main',
+            "Implementation-Title": "${project.name}",
+            "Implementation-Version": "${project.version}",
+            "Implementation-Vendor": "${project.group}",
+            "Implementation-Timestamp": new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
+            "Premain-Class": "cn.enaium.cafully.agent.Agent",
+            "Agent-Class": "cn.enaium.cafully.agent.Agent",
+            "Can-Redefine-Classes": true,
+            "Can-Retransform-Classes": true
+    )
+}
+
+shadowJar {
+    archiveClassifier.set('')
+}
+
+build.dependsOn shadowJar

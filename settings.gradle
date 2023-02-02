@@ -1,0 +1,6 @@
+rootProject.name = 'root'
+include 'cafully-core'
+include 'cafully-agent'
+include 'cafully-api'
+include 'cafully-util'
+
