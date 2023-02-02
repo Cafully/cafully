@@ -21,6 +21,7 @@ subprojects {
 
     java {
         withSourcesJar()
+        withJavadocJar()
     }
 
     tasks.withType(JavaCompile) {
