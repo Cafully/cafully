@@ -10,11 +10,15 @@ Add JVM Options
 
 `-javaagent:/absolute/path/to/cafully-agent.jar`
 
-If you usage `JDK17+` also add:
+If you usage `ASM` also add:
 
 ```
 --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.org.objectweb.asm.commons=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.org.objectweb.asm.signature=ALL-UNNAMED
 --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.org.objectweb.asm.tree.analysis=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.org.objectweb.asm.util=ALL-UNNAMED
 ```
 
 ## Plugin
