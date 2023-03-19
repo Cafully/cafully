@@ -15,8 +15,8 @@ subprojects {
     }
 
     dependencies {
-        api 'org.tinylog:tinylog-api:2.6.0'
-        api 'org.tinylog:tinylog-impl:2.6.0'
+        api 'org.tinylog:tinylog-api:2.6.1'
+        api 'org.tinylog:tinylog-impl:2.6.1'
     }
 
     java {
