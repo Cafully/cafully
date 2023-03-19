@@ -19,6 +19,7 @@ public interface ITransformer {
      * @param name class name
      * @return is support
      * @since 1.0.0
+     * @deprecated name may be null
      */
     @Deprecated
     default boolean supportClass(@Nullable String name) {
