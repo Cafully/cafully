@@ -1,4 +1,4 @@
-rootProject.name = 'root'
+rootProject.name = 'cafully'
 include 'cafully-core'
 include 'cafully-agent'
 include 'cafully-api'
