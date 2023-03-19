@@ -34,13 +34,6 @@ subprojects {
 
     publishing {
         repositories {
-            def ENV = System.getenv()
-            if (ENV.MAVEN_URL) {
-                maven {
-                    url ENV.MAVEN_URL
-                }
-            }
-
             maven {
                 url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                 credentials {
