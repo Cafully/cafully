@@ -8,7 +8,6 @@ package cn.enaium.cafully.agent;
 
 import cn.enaium.cafully.plugin.PluginManager;
 import cn.enaium.cafully.plugin.api.ITransformer;
-import cn.enaium.cafully.util.LoggerUtil;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
@@ -34,7 +33,7 @@ public class DefaultTransformer implements ClassFileTransformer {
             final List<ITransformer> transformers = pluginManager.transformerHelper.all();
             transformers.sort(Comparator.comparingInt(ITransformer::priority));
             for (ITransformer transformer : transformers) {
-                if (!transformer.supportClass(className)) {
+                if (!transformer.supportClass(className) || !transformer.support(loader, className, classBeingRedefined, protectionDomain, basic)) {
                     continue;
                 }
 
@@ -42,9 +41,8 @@ public class DefaultTransformer implements ClassFileTransformer {
 
                 transformer.after(loader, className, classBeingRedefined, protectionDomain, basic);
             }
-
         } catch (Throwable e) {
-            LOGGER.error(e);
+            LOGGER.error(e, "Class:{}", className);
         }
         return basic;
     }

@@ -6,6 +6,8 @@
 
 package cn.enaium.cafully.plugin.api;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.security.ProtectionDomain;
 
 /**
@@ -18,7 +20,18 @@ public interface ITransformer {
      * @return is support
      * @since 1.0.0
      */
-    boolean supportClass(String name);
+    @Deprecated
+    default boolean supportClass(@Nullable String name) {
+        return false;
+    }
+
+    /**
+     * @return is support
+     * @since 1.1.0
+     */
+    default boolean support(ClassLoader loader, @Nullable String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] basic) {
+        return false;
+    }
 
     default int priority() {
         return Byte.MAX_VALUE;
