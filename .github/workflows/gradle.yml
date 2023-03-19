@@ -32,4 +32,4 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
-        gradle-version: 6.7
+        gradle-version: 7.6
