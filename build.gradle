@@ -97,6 +97,8 @@ subprojects {
     }
 
     signing {
-        sign publishing.publications.mavenJava
+        if (project.properties["signing.secretKeyRingFile"]) {
+            sign publishing.publications.mavenJava
+        }
     }
 }
