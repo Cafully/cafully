@@ -1,6 +1,8 @@
 # Cafully
 
-![GitHub](https://img.shields.io/github/license/Cafully/cafully?style=flat-square) ![Maven Central](https://img.shields.io/maven-central/v/cn.enaium.cafully/cafully-agent?style=flat-square)
+![GitHub](https://img.shields.io/github/license/Cafully/cafully?style=flat-square)
+[![Maven Central](https://img.shields.io/maven-central/v/cn.enaium.cafully/cafully-agent?style=flat-square)](https://central.sonatype.com/search?smo=true&q=cafully-api)
+[![JitPack](https://img.shields.io/jitpack/version/com.github.Cafully/cafully?style=flat-square)](https://jitpack.io/#Cafully/cafully)
 
 ## Usage
 
